@@ -130,14 +130,13 @@ public class Config {
      * @param obj Object to set
      */
     public void set(String path, Object obj) {
-        String lastSubPath = path;
-        if(path.contains("."))
-            lastSubPath = path.substring(0, path.lastIndexOf('.'));
-        JsonElement element = getElement(lastSubPath, new JsonObject());
+//        if(path.contains("."))
+//            lastSubPath = path.substring(path.lastIndexOf('.')+1);
+        JsonElement element = getElement(path, new JsonObject());
         System.out.println(element);
 
         if(element.isJsonObject())
-            element.getAsJsonObject().add(lastSubPath, parser.parse(gson.toJson(obj)));
+            element.getAsJsonObject().add(path, parser.parse(gson.toJson(obj)));
         else
             throw new IllegalArgumentException("Make sure the element at the specified path is a JsonObject not a JsonArray!!");
         //element.getAsJsonArray().add(parser.parse(gson.toJson(obj)));
